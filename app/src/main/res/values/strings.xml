@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Museum Digital</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_dashboard">Beranda</string>
+    <string name="title_budaya">Budaya</string>
+    <string name="title_resep">Resep</string>
+    <string name="dashboard_info">selamat menjelajah dan mengenal budaya sumatera utara</string>
+    <string name="greeting">Halo!</string>
+    <string name="tvbudaya">Takdir sebuah peradaban tertulis dalam jejak kebudayaannya, \n mengungkapkan cerita dan nilai-nilai yang mengikat hati manusia \n sepanjang zaman.</string>
+    <string name="tvresep">Makanan daerah bukan sekadar hidangan, tapi juga kisah yang \n merangkai cita rasa dan tradisi lokal. Dalam setiap suapan, \n kita merasakan sejarah yang tersembunyi di setiap rempah dan aroma yang memeluk kenangan.</string>
+    <string name="judul">Judul</string>
+    <string name="ket">Keterangan</string>
+    <string name="desc">Deskripsi</string>
+    <string name="link">ini link</string>
+    <string name ="category">kategori</string>
+    <string name="category_budaya">Budaya Daerah\nSumatera Utara</string>
+    <string name="category_makanan">Resep Makanan Daerah \n Sumatera Utara</string>
 </resources>

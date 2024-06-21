@@ -1,0 +1,45 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.museumdigital.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_budaya"
+            app:destination="@id/navigation_budaya" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_makanan"
+            app:destination="@id/navigation_makanan" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_budaya"
+        android:name="com.example.museumdigital.budaya.view.BudayaFragment"
+        android:label="@string/title_budaya"
+        tools:layout="@layout/fragment_budaya" >
+        <action
+            android:id="@+id/action_navigation_budaya_to_navigation_makanan"
+            app:destination="@id/navigation_makanan" />
+        <action
+            android:id="@+id/action_navigation_budaya_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_makanan"
+        android:name="com.example.museumdigital.resep.view.MakananFragment"
+        android:label="@string/title_resep"
+        tools:layout="@layout/fragment_makanan" >
+        <action
+            android:id="@+id/action_navigation_makanan_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_navigation_makanan_to_navigation_budaya"
+            app:destination="@id/navigation_budaya" />
+    </fragment>
+</navigation>

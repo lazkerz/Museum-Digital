@@ -16,6 +16,18 @@
         android:theme="@style/Theme.MuseumDigital"
         tools:targetApi="31">
         <activity
+            android:name=".tambahBudaya.view.TambahBudayaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tambahResep.view.TambahResepActivity"
+            android:exported="false" />
+        <activity
+            android:name=".budaya.view.Detail_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.auth.view.UserActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
