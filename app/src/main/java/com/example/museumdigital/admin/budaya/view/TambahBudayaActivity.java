@@ -6,25 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.Manifest;
 import com.example.museumdigital.R;
 import com.example.museumdigital.admin.budaya.model.Budaya;
 import com.example.museumdigital.admin.budaya.presenter.AddBudayaPresenter;
 import com.example.museumdigital.core.utils.UserDataStoreImpl;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class TambahBudayaActivity extends AppCompatActivity implements AddBudayaView {
 
@@ -33,6 +39,10 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
 
     private EditText etName, etDescription, etMaps;
     private Spinner spKategori;
+
+    private HashMap<String, Integer> kategoriMap;
+
+    private TextView btnUpload;
     private ImageView ivProfilePicture;
     private Uri selectedImageUri;
     private AddBudayaPresenter addBudayaPresenter;
@@ -47,8 +57,18 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
         etMaps = findViewById(R.id.etMaps);
         spKategori = findViewById(R.id.spKategori);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
+        btnUpload = findViewById(R.id.btn_upload_budaya);
+
+        setupSpinner();
 
         addBudayaPresenter = new AddBudayaPresenter(this, new UserDataStoreImpl(this), this);
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onUploadGambarClick(v);
+            }
+        });
 
         TextView btnAddBudaya = findViewById(R.id.btn_upload_budaya);
         btnAddBudaya.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +77,8 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
                 String name = etName.getText().toString().trim();
                 String description = etDescription.getText().toString().trim();
                 String maps = etMaps.getText().toString().trim();
-                int kategoriId = spKategori.getSelectedItemPosition(); // Change as needed
+                String selectedKategori = spKategori.getSelectedItem().toString();
+                int kategoriId = kategoriMap.get(selectedKategori);// Change as needed
 
                 if (name.isEmpty() || description.isEmpty()) {
                     Toast.makeText(TambahBudayaActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -66,7 +87,10 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
 
                 File imageFile = null;
                 if (selectedImageUri != null) {
-                    imageFile = new File(selectedImageUri.getPath());
+                    String imagePath = getRealPathFromURI(selectedImageUri);
+                    if (imagePath != null) {
+                        imageFile = new File(imagePath);
+                    }
                 }
 
                 Budaya budaya = new Budaya();
@@ -76,11 +100,41 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
                 budaya.setKategoriId(kategoriId);
 
                 addBudayaPresenter.addBudaya(budaya, imageFile);
-
             }
         });
     }
 
+    private void setupSpinner() {
+        // Menyiapkan data untuk spinner dan nilai yang terkait
+        kategoriMap = new HashMap<>();
+        kategoriMap.put("Baju Adat", 1);
+        kategoriMap.put("Alat Musik", 2);
+        kategoriMap.put("Tarian", 3);
+        kategoriMap.put("Tradisi", 4);
+
+        // Membuat daftar untuk menampilkan teks dalam spinner
+        List<String> kategoriList = new ArrayList<>(kategoriMap.keySet());
+
+        // Membuat ArrayAdapter menggunakan daftar string
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, kategoriList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spKategori.setAdapter(adapter);
+
+        // Mengatur listener untuk mendapatkan nilai yang dipilih
+        spKategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedKategori = parent.getItemAtPosition(position).toString();
+                int selectedValue = kategoriMap.get(selectedKategori);
+                Toast.makeText(TambahBudayaActivity.this, "Selected: " + selectedKategori + " with value: " + selectedValue, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    }
     public void onUploadGambarClick(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
@@ -111,9 +165,27 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
-            ivProfilePicture.setImageURI(selectedImageUri);
+            String imagePath = getRealPathFromURI(selectedImageUri);
+            if (imagePath != null) {
+                ivProfilePicture.setImageURI(selectedImageUri);
+            } else {
+                Toast.makeText(this, "Failed to get image path", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String path = cursor.getString(column_index);
+        cursor.close();
+        return path;
+    }
+
+
 
     @Override
     public void showAddBudayaSuccessMessage(String message, Budaya data) {
