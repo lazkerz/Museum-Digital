@@ -7,7 +7,7 @@
     android:paddingHorizontal="16dp"
     android:clipToPadding="false"
     android:background="@color/white"
-    tools:context=".tambahBudaya.view.TambahBudayaActivity">
+    tools:context=".admin.budaya.view.TambahBudayaActivity">
 
     <com.google.android.material.appbar.AppBarLayout
 
@@ -116,8 +116,6 @@
                     android:id="@+id/etNama"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/field_background"
-                    android:backgroundTint="@color/gray"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Deskripsi Budaya"
+                android:text="Kategori Budaya"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +140,6 @@
                 android:fontFamily="sans-serif"
                 android:popupBackground="@color/primary"
                 android:backgroundTint="@color/gray"
-                android:background="@drawable/field_background"
                 android:spinnerMode="dropdown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_kategori_budaya"
@@ -154,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Keunikan Resep"
+                android:text="Deskripsi"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,8 +173,6 @@
                     android:id="@+id/etDeskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/field_background"
-                    android:backgroundTint="@color/gray"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,8 +204,6 @@
                     android:id="@+id/etMaps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/field_background"
-                    android:backgroundTint="@color/light_grey"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 

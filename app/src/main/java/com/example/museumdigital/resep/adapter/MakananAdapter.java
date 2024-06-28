@@ -6,25 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.museumdigital.core.model.Makanan.DataItem;
-import com.example.museumdigital.core.model.Makanan.MakananResponse;
-import com.example.museumdigital.R;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-
 import com.example.museumdigital.R;
 
 import java.util.List;
@@ -33,9 +20,11 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
 
     private Context context;
     private List<DataItem> makananList;
+    private OnItemClickListener listener;
 
-    public MakananAdapter(Context context) {
+    public MakananAdapter(Context context, OnItemClickListener listener) {
         this.context = context;
+        this.listener = listener;
     }
 
     public void setData(List<DataItem> makananList) {
@@ -67,6 +56,16 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
         } else {
             holder.ivMakanan.setImageResource(R.drawable.placeholder_image); // Default placeholder if no image URL
         }
+
+        // Set click listener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(makanan.getId()); // Pass ID to listener
+                }
+            }
+        });
     }
 
     @Override
@@ -81,9 +80,14 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
 
         public MakananViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivMakanan = itemView.findViewById(R.id.ivMakanan);
+            ivMakanan = itemView.findViewById(R.id.ivBudaya);
             tvJudul = itemView.findViewById(R.id.tvJudul);
             tvDesc = itemView.findViewById(R.id.tvDesc);
         }
+    }
+
+    // Interface for item click listener
+    public interface OnItemClickListener {
+        void onItemClick(int makananId);
     }
 }

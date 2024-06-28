@@ -1,11 +1,15 @@
 package com.example.museumdigital;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.museumdigital.adapter.CarouselAdapter;
 import com.example.museumdigital.adapter.Slider;
+import com.example.museumdigital.admin.auth.view.SignInActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +28,6 @@ public class DashboardFragment extends Fragment {
     private ViewPager2 viewPager;
     private LinearLayout indicatorsContainer;
     private CarouselAdapter carouselAdapter;
-
-    public DashboardFragment() {
-        // Required empty public constructor
-    }
 
     public static DashboardFragment newInstance(String param1, String param2) {
         DashboardFragment fragment = new DashboardFragment();
@@ -94,12 +95,34 @@ public class DashboardFragment extends Fragment {
         };
         handler.postDelayed(runnable, 5000);
 
+        TextView textViewNavigateToSignIn = view.findViewById(R.id.Signin);
+        textViewNavigateToSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToSignIn();
+            }
+        });
+
         return view;
+    }
+
+    private void navigateToSignIn() {
+        Intent intent = new Intent(getActivity(), SignInActivity.class);
+        startActivity(intent);
     }
 
     // Method to set up indicators
     private void setupIndicators(LinearLayout indicatorsContainer) {
-        // Your implementation for setting up indicators
+//        indicators = new ImageView[carouselAdapter.getItemCount()];
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(8, 0, 8, 0);
+//        for (int i = 0; i < indicators.length; i++) {
+//            indicators[i] = new ImageView(getContext());
+//            indicators[i].setImageResource(R.drawable.indicator_inactive);
+//            indicators[i].setLayoutParams(layoutParams);
+//            indicatorsContainer.addView(indicators[i]);
+//        }
     }
 
     // Method to set current indicator

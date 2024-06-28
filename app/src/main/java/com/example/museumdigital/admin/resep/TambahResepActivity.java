@@ -1,4 +1,4 @@
-package com.example.museumdigital.tambahResep.view;
+package com.example.museumdigital.admin.resep;
 
 import androidx.appcompat.app.AppCompatActivity;
 

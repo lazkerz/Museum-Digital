@@ -4,6 +4,7 @@
     <string name="title_dashboard">Beranda</string>
     <string name="title_budaya">Budaya</string>
     <string name="title_resep">Resep</string>
+    <string name="sign_in">Masuk</string>
     <string name="dashboard_info">selamat menjelajah dan mengenal budaya sumatera utara</string>
     <string name="greeting">Halo!</string>
     <string name="tvbudaya">Takdir sebuah peradaban tertulis dalam jejak kebudayaannya, \n mengungkapkan cerita dan nilai-nilai yang mengikat hati manusia \n sepanjang zaman.</string>
@@ -12,7 +13,7 @@
     <string name="ket">Keterangan</string>
     <string name="desc">Deskripsi</string>
     <string name="link">ini link</string>
-    <string name ="category">kategori</string>
+    <string name="category">kategori</string>
     <string name="category_budaya">Budaya Daerah\nSumatera Utara</string>
     <string name="category_makanan">Resep Makanan Daerah \n Sumatera Utara</string>
 </resources>

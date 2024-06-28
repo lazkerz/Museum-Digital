@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:clipToPadding="false"
-    android:paddingHorizontal="16dp"
     tools:context=".budaya.view.Detail_Activity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -28,18 +27,19 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_brand_detail"
+                android:id="@+id/tv_judul"
                 android:textSize="18dp"
                 android:fontFamily="sans-serif-medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/judul"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_img_product"
+                android:id="@+id/image_budaya"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
@@ -76,11 +76,12 @@
                 android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/category"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/primary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_img_product" />
+                app:layout_constraintTop_toBottomOf="@id/image_budaya" />
 
             <TextView
                 android:id="@+id/tv_desc"
@@ -88,10 +89,13 @@
                 android:fontFamily="sans-serif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/desc"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/tv_category"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_category" />
 
             <TextView
@@ -100,9 +104,10 @@
                 android:fontFamily="sans-serif-medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:text="Daerah Asal Budaya"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc"/>
 
@@ -113,9 +118,16 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/link"
                 android:textColor="@color/secondary"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginStart="16dp"
                 android:textSize="14dp"
                 android:fontFamily="sans-serif"
                 android:maxLines="5"
+                android:clickable="true"
+                android:focusable="true"
+                android:autoLink="web"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_link"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

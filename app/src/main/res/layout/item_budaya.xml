@@ -18,7 +18,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/ivMakanan"
+            android:id="@+id/ivBudaya"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -38,27 +38,26 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-medium"
-            android:maxLength="16"
             android:text="@string/judul"
             android:textColor="@color/black"
             android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@id/ivMakanan"
+            app:layout_constraintStart_toEndOf="@id/ivBudaya"
             app:layout_constraintTop_toBottomOf="@id/tvDesc"
-            app:layout_constraintTop_toTopOf="@id/ivMakanan" />
+            app:layout_constraintTop_toTopOf="@id/ivBudaya" />
 
         <TextView
             android:id="@+id/tvDesc"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:maxWidth="200dp"
-            android:maxLength="60"
+            android:fontFamily="sans-serif"
+            android:maxWidth="250dp"
             android:maxLines="4"
             android:text="@string/ket"
             android:textColor="@color/black"
             android:textSize="12dp"
+            android:scrollHorizontally="false"
             app:layout_constraintStart_toStartOf="@id/tvJudul"
             app:layout_constraintTop_toBottomOf="@id/tvJudul" />
     </androidx.constraintlayout.widget.ConstraintLayout>

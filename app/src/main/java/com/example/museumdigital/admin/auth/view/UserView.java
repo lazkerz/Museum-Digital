@@ -5,5 +5,5 @@ public interface UserView {
     void showUserCreationErrorMessage(String message);
     void showLoginSuccessMessage();
     void showLoginErrorMessage(String message);
+    void showLoading(boolean isLoading);
 }
-

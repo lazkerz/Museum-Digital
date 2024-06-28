@@ -1,52 +1,103 @@
 package com.example.museumdigital.admin.auth.presenter;
-import com.example.museumdigital.admin.auth.data.User;
-import com.example.museumdigital.admin.auth.data.UserRepository;
-import com.example.museumdigital.admin.auth.view.UserView;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import android.content.Context;
+import android.util.Log;
+
+import com.example.museumdigital.admin.auth.view.UserView;
+import com.example.museumdigital.core.model.Login.LoginResponse;
+import com.example.museumdigital.core.remote.ApiConfig;
+import com.example.museumdigital.core.remote.apiservice.AuthApi;
+import com.example.museumdigital.core.utils.UserDataStoreImpl;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserPresenter {
-    private UserView view;
-    private UserRepository userRepository;
+    private Context context;
+    private UserDataStoreImpl userDataStoreImpl;
+    private UserView userView;
 
-    public UserPresenter(UserView view, UserRepository userRepository) {
-        this.view = view;
-        this.userRepository = userRepository;
+    public UserPresenter(Context context, UserDataStoreImpl userDataStoreImpl, UserView userView) {
+        this.context = context;
+        this.userDataStoreImpl = userDataStoreImpl;
+        this.userView = userView;
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] bytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes) {
-                sb.append(String.format("%02x", b));
+    public void login(String username, String password) {
+        AuthApi authApi = ApiConfig.getAuthApi(context);
+        Call<LoginResponse> call = authApi.login(username, password);
+
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    LoginResponse loginResponse = response.body();
+                    LoginResponse.User user = loginResponse.getUser();
+                    if (user != null) {
+                        String token = user.getToken();
+                        String refreshToken = user.getRefreshToken();
+                        if (token != null && refreshToken != null && !token.isEmpty() && !refreshToken.isEmpty()) {
+                            userDataStoreImpl.saveToken(token, refreshToken);
+                            Log.d("UserPresenter", "Token saved: " + token);
+                            userView.showLoginSuccessMessage();
+                        } else {
+                            Log.e("UserPresenter", "Token or refreshToken is null or empty");
+                            userView.showLoginErrorMessage("Token or refreshToken is null or empty");
+                        }
+                    } else {
+                        Log.e("UserPresenter", "User object in response is null");
+                        userView.showLoginErrorMessage("User object in response is null");
+                    }
+                } else {
+                    Log.e("UserPresenter", "Login failed with message: " + response.message());
+                    userView.showLoginErrorMessage("Login failed with message: " + response.message());
+                }
             }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.e("UserPresenter", "Failed to execute login request: " + t.getMessage(), t);
+                userView.showLoginErrorMessage("Failed to execute login request: " + t.getMessage());
+            }
+        });
     }
 
-    public void createUser(String username, String password) throws SQLException {
-        String hashedPassword = hashPassword(password);
-        User user = new User(username, hashedPassword);
-        boolean success = userRepository.createUser(user);
-        if (success) {
-            view.showUserCreatedMessage();
+    public void signOut() {
+        String token = userDataStoreImpl.getToken();
+
+        if (token != null) {
+            AuthApi authApi = ApiConfig.getAuthApi(context);
+            Call<Void> call = authApi.signOut("Bearer " + token);
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        userDataStoreImpl.clearToken();
+                        userView.showLoginSuccessMessage();
+                    } else {
+                        String errorMessage = "Sign out failed";
+                        if (response.errorBody() != null) {
+                            try {
+                                errorMessage = response.errorBody().string();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Log.e("UserPresenter", "Sign out failed with message: " + errorMessage);
+                        userView.showLoginErrorMessage(errorMessage);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("UserPresenter", "Failed to execute sign out request: " + t.getMessage(), t);
+                    userView.showLoginErrorMessage("Failed to execute sign out request: " + t.getMessage());
+                }
+            });
         } else {
-            view.showUserCreationErrorMessage("Failed to create user.");
+            userView.showLoginErrorMessage("No token found for sign out");
         }
     }
-
-//    public void loginUser(String username, String password) {
-//        User user = userRepository.getUserByUsername(username);
-//        if (user != null && hashPassword(password).equals(user.getPassword())) {
-//            view.showLoginSuccessMessage();
-//        } else {
-//            view.showLoginErrorMessage("Invalid username or password.");
-//        }
-//    }
 }

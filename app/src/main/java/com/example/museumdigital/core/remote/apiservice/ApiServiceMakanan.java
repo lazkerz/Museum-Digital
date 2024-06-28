@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 public interface ApiServiceMakanan {
 
-    @GET("api/v1/makanan")
+    @GET("makanan")
     Call<MakananResponse> getMakanan();
 }

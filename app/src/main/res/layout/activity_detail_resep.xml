@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,168 +8,208 @@
     android:clipToPadding="false"
     tools:context=".resep.view.Detail_Resep_Activity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_detail_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
             <ImageView
                 android:id="@+id/img_resep"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:elevation="1dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img"
+                android:src="@drawable/placeholder_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ic_back"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="16dp"
                 android:elevation="10dp"
                 android:src="@drawable/btn_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <ScrollView
-        android:id="@+id/sv_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:layout_editor_absoluteX="16dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_nama_resep"
+                android:id="@+id/tv_nama_makanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Nama Masakan"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="18dp"
+                app:layout_constraintTop_toBottomOf="@id/img_resep"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/tv_deskrpsi_resep"
+                android:id="@+id/tv_deskripsi_makanan"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:lineSpacingExtra="3dp"
                 android:fontFamily="sans-serif"
-                android:text="Deskripsi resep"
+                android:text="Deskripsi masakan"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nama_resep" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_nama_makanan" />
 
             <TextView
-                android:id="@+id/tv_keunikan_resep"
+                android:id="@+id/tv_bahan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Nama Masakan"
+                android:text="Bahan - bahan"
                 android:textColor="@color/black"
-                android:textSize="14dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_deskrpsi_resep" />
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_deskripsi_makanan" />
+
 
             <TextView
-                android:id="@+id/tv_nama_keunikan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="Nama Masakan"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                app:layout_constraintStart_toEndOf="@+id/tv_keunikan_resep"
-                app:layout_constraintTop_toBottomOf="@+id/tv_deskrpsi_resep" />
-
-            <TextView
-                android:id="@+id/tv_deskrpsi_keunikan"
+                android:id="@+id/tv_deskrpsi_bahan"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="sans-serif"
                 android:text="Deskripsi keunikan resep"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_keunikan_resep" />
+                app:layout_constraintTop_toBottomOf="@id/tv_bahan" />
 
             <TextView
-                android:id="@+id/tv_bahan_resep"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_cara_memasak"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Bahan-Bahan"
+                android:text="Cara Memasak"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_deskrpsi_keunikan"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_deskrpsi_bahan"/>
 
             <TextView
-                android:id="@+id/tv_desc_bahan"
+                android:id="@+id/tv_deskripsi_cara_memasak"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:lineSpacingExtra="3dp"
                 android:fontFamily="sans-serif"
-                android:text="Deskripsi bahan-bahan"
+                android:text="Deskripsi cara memasak"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_bahan_resep" />
+                app:layout_constraintTop_toBottomOf="@id/tv_cara_memasak" />
 
             <TextView
-                android:id="@+id/tv_langkah_resep"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_penyajian"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Langkah-Langkah"
+                android:text="Penyajian"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_desc_bahan"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_deskripsi_cara_memasak"/>
 
             <TextView
-                android:id="@+id/tv_desc_langkah"
+                android:id="@+id/tv_deskripsi_penyajian"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:lineSpacingExtra="3dp"
                 android:fontFamily="sans-serif"
                 android:text="Deskripsi langkah-langkah"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_langkah_resep" />
+                app:layout_constraintTop_toBottomOf="@id/tv_penyajian"/>
+
+            <TextView
+                android:id="@+id/tv_keunikan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Keunikan"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_deskripsi_penyajian"/>
+
+            <TextView
+                android:id="@+id/tv_deskripsi_keunikan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="sans-serif"
+                android:text="Deskripsi keunikan"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_keunikan"/>
+
+            <TextView
+                android:id="@+id/tv_lokasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Lokasi"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_deskripsi_keunikan"/>
+
+            <TextView
+                android:id="@+id/lokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="sans-serif"
+                android:text="Deskripsi keunikan"
+                android:textColor="@color/secondary"
+                android:textSize="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:autoLink="web"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lokasi"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

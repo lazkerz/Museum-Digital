@@ -1,66 +1,86 @@
 package com.example.museumdigital.budaya.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.museumdigital.R;
+import com.example.museumdigital.budaya.adapter.BudayaAdapter;
+import com.example.museumdigital.budaya.presenter.BudayaPresenter;
+import com.example.museumdigital.core.MainView;
+import com.example.museumdigital.core.model.Budaya.DataBudaya;
+import com.example.museumdigital.core.model.Makanan.DataItem;
+import com.example.museumdigital.core.remote.ApiClient.ApiClient;
+import com.example.museumdigital.resep.view.Detail_Resep_Activity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Tarian_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Tarian_Fragment extends Fragment {
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class Tarian_Fragment extends Fragment implements MainView {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Tarian_Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Tarian_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Tarian_Fragment newInstance(String param1, String param2) {
-        Tarian_Fragment fragment = new Tarian_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    private RecyclerView rvBudaya;
+    private BudayaAdapter budayaAdapter;
+    private BudayaPresenter presenter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tarian_, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tarian_, container, false);
+
+        rvBudaya = rootView.findViewById(R.id.rv_tarian);
+        rvBudaya.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        swipeRefreshLayout = rootView.findViewById(R.id.swiperefresh);
+        if (swipeRefreshLayout == null) {
+            throw new NullPointerException("SwipeRefreshLayout is null. Check the layout file.");
+        }
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh Makanan Data
+                presenter.fetchBudayaData("3");
+            }
+        });
+        // Initialize Adapter
+        budayaAdapter = new BudayaAdapter(getContext(), budayaId -> {
+            Intent intent = new Intent(getContext(), Detail_Activity.class);
+            intent.putExtra("BUDAYA_ID", budayaId);
+            startActivity(intent);
+        });
+        rvBudaya.setAdapter(budayaAdapter);
+
+        // Initialize Presenter
+        presenter = new BudayaPresenter(this, new ApiClient(getContext()));
+
+        // Fetch Makanan Data
+        presenter.fetchBudayaData("3");
+
+        return rootView;
+    }
+
+
+    @Override
+    public void showMakananData(List<DataItem> makananList) {
+        // Show Makanan Data in RecyclerView through Adapter
+    }
+
+    @Override
+    public void showBudayaData(List<DataBudaya> budayaList) {
+        // Not used in MakananFragment
+        budayaAdapter.setData(budayaList);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showError(String message) {
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

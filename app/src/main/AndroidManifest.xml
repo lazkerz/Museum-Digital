@@ -8,18 +8,29 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseumDigital"
         tools:targetApi="31">
         <activity
-            android:name=".tambahBudaya.view.TambahBudayaActivity"
+            android:name=".admin.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".tambahResep.view.TambahResepActivity"
+            android:name=".admin.auth.view.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".resep.view.Detail_Resep_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.budaya.view.TambahBudayaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.resep.TambahResepActivity"
             android:exported="false" />
         <activity
             android:name=".budaya.view.Detail_Activity"

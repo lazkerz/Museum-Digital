@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:clipToPadding="false"
     android:background="@color/white"
-    tools:context=".tambahResep.view.TambahResepActivity">
+    tools:context=".admin.resep.TambahResepActivity">
 
     <com.google.android.material.appbar.AppBarLayout
 
@@ -116,8 +116,6 @@
             android:id="@+id/etNama"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/field_background"
-            android:backgroundTint="@color/light_grey"
             tools:ignore="VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,8 +147,6 @@
             android:id="@+id/etDeskripsi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/field_background"
-            android:backgroundTint="@color/light_grey"
             tools:ignore="VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,8 +178,6 @@
             android:id="@+id/etKeunikan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/field_background"
-            android:backgroundTint="@color/light_grey"
             tools:ignore="VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -215,8 +209,6 @@
             android:id="@+id/etBahan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/field_background"
-            android:backgroundTint="@color/light_grey"
             tools:ignore="VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -248,8 +240,6 @@
                     android:id="@+id/etLangkah"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/field_background"
-                    android:backgroundTint="@color/light_grey"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
