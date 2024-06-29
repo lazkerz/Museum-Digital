@@ -13,7 +13,7 @@ import com.example.museumdigital.R;
 import com.example.museumdigital.admin.auth.presenter.UserPresenter;
 import com.example.museumdigital.admin.auth.view.UserView;
 import com.example.museumdigital.admin.budaya.view.TambahBudayaActivity;
-import com.example.museumdigital.admin.resep.TambahResepActivity;
+import com.example.museumdigital.admin.resep.view.TambahResepActivity;
 import com.example.museumdigital.core.utils.UserDataStoreImpl;
 
 public class DashboardActivity extends AppCompatActivity implements UserView {

@@ -141,7 +141,7 @@
                 android:textSize="12dp"
                 android:fontFamily="sans-serif"
                 android:popupBackground="@color/primary"
-                android:backgroundTint="@color/gray"
+                android:background="@drawable/field_background"
                 android:spinnerMode="dropdown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_kategori_budaya"

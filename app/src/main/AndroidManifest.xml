@@ -4,10 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:allowBackup="true"
@@ -22,6 +19,9 @@
         android:theme="@style/Theme.MuseumDigital"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.DashboardActivity"
             android:exported="false" />
         <activity
@@ -34,16 +34,13 @@
             android:name=".admin.budaya.view.TambahBudayaActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.resep.TambahResepActivity"
+            android:name=".admin.resep.view.TambahResepActivity"
             android:exported="false" />
         <activity
             android:name=".budaya.view.Detail_Activity"
             android:exported="false" />
         <activity
-            android:name=".admin.auth.view.UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.museumdigital.R;
+import com.example.museumdigital.admin.budaya.adapter.CustomSpinnerAdapter;
 import com.example.museumdigital.admin.budaya.model.Budaya;
 import com.example.museumdigital.admin.budaya.presenter.AddBudayaPresenter;
 import com.example.museumdigital.core.utils.UserDataStoreImpl;
@@ -43,7 +44,7 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
     private HashMap<String, Integer> kategoriMap;
 
     private TextView btnUpload;
-    private ImageView ivProfilePicture;
+    private ImageView ivProfilePicture, icback;
     private Uri selectedImageUri;
     private AddBudayaPresenter addBudayaPresenter;
 
@@ -58,11 +59,13 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
         spKategori = findViewById(R.id.spKategori);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         btnUpload = findViewById(R.id.btn_upload_budaya);
+        icback = findViewById(R.id.ic_back);
 
         setupSpinner();
 
         addBudayaPresenter = new AddBudayaPresenter(this, new UserDataStoreImpl(this), this);
 
+        icback.setOnClickListener(v -> onBackPressed());
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +119,8 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
         List<String> kategoriList = new ArrayList<>(kategoriMap.keySet());
 
         // Membuat ArrayAdapter menggunakan daftar string
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, kategoriList);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, kategoriList);
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, kategoriList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spKategori.setAdapter(adapter);
 
@@ -126,7 +130,6 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedKategori = parent.getItemAtPosition(position).toString();
                 int selectedValue = kategoriMap.get(selectedKategori);
-                Toast.makeText(TambahBudayaActivity.this, "Selected: " + selectedKategori + " with value: " + selectedValue, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -199,18 +202,4 @@ public class TambahBudayaActivity extends AppCompatActivity implements AddBudaya
         Toast.makeText(this, "Failed to add budaya: " + message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showLoginSuccessMessage() {
-        // Implementation not shown for brevity
-    }
-
-    @Override
-    public void showLoginErrorMessage(String message) {
-        // Implementation not shown for brevity
-    }
-
-    @Override
-    public void showUserCreatedMessage() {
-        // Implementation not shown for brevity
-    }
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.chuckerteam.chucker.api.ChuckerCollector;
 import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.example.museumdigital.core.remote.apiservice.ApiServiceAddBudaya;
+import com.example.museumdigital.core.remote.apiservice.ApiServiceAddMakanan;
 import com.example.museumdigital.core.remote.apiservice.ApiServiceBudaya;
 import com.example.museumdigital.core.remote.apiservice.ApiServiceDetailBudaya;
 import com.example.museumdigital.core.remote.apiservice.ApiServiceDetailMakanan;
@@ -80,6 +81,10 @@ public class ApiConfig {
 
     public static ApiServiceMakanan getApiServiceMakanan(Context context) {
         return getApiService(context, ApiServiceMakanan.class);
+    }
+
+    public static ApiServiceAddMakanan getApiServiceAddMakanan(Context context) {
+        return getApiService(context, ApiServiceAddMakanan.class);
     }
 
     public static ApiServiceDetailMakanan getApiServiceDetailMakanan(Context context) {
