@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         RealmConfiguration config = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(config);
 
-
-
         BottomNavigationView navView = findViewById(R.id.bottomNavigation);
 
         // Inisialisasi NavController

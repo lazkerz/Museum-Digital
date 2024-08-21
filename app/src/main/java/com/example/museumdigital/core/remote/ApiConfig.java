@@ -25,7 +25,11 @@ import java.util.Collections;
 
 public class ApiConfig {
 
-    private static final String API_BASE_URL = "http://34.128.85.8/api/v1/";
+//    deploy
+//    private static final String API_BASE_URL = "http://34.128.85.8/api/v1/";
+
+    private static final String API_BASE_URL = "http://192.168.46.93:3000/api/v1/";
+
 
     private ApiConfig() {}
 

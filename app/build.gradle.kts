@@ -50,7 +50,6 @@ dependencies {
     implementation("io.realm.kotlin:library-sync:1.11.0") // If using Device Sync / If using coroutines with the SDK
     implementation("io.realm:realm-android-library:10.9.0")
 
-
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.museumdigital.R;
+import com.example.museumdigital.admin.DashboardActivity;
+import com.example.museumdigital.admin.auth.presenter.UserPresenter;
+import com.example.museumdigital.admin.budaya.view.TambahBudayaActivity;
 import com.example.museumdigital.core.remote.ApiClient.ApiClient;
 import com.example.museumdigital.resep.model.Data;
 import com.example.museumdigital.resep.model.DetailMakananResponse;
@@ -24,7 +28,7 @@ import retrofit2.Response;
 
 public class Detail_Resep_Activity extends AppCompatActivity {
 
-    private ImageView imageMakanan , back;
+    private ImageView imageMakanan , back, edit, delete;
     private TextView tvNamaMakanan, tvDeskripsi, tvBahan, tvCaraMemasak, tvPenyajian, tvKeunikan , link;
     private ApiClient apiClient;
 
@@ -43,6 +47,9 @@ public class Detail_Resep_Activity extends AppCompatActivity {
         tvCaraMemasak = findViewById(R.id.tv_deskripsi_cara_memasak);
         tvPenyajian = findViewById(R.id.tv_deskripsi_penyajian);
         tvKeunikan = findViewById(R.id.tv_deskripsi_keunikan);
+        edit = findViewById(R.id.ic_edit);
+        delete = findViewById(R.id.ic_delete);
+
 
         // Get the passed ID
         int makananId = getIntent().getIntExtra("MAKANAN_ID", -1);
@@ -51,6 +58,17 @@ public class Detail_Resep_Activity extends AppCompatActivity {
         apiClient = new ApiClient(this);
 
         back.setOnClickListener(v -> onBackPressed());
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Detail_Resep_Activity.this, TambahBudayaActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        delete.setOnClickListener(v -> onDestroy());
 
         // Fetch the detail data
         fetchDetailMakanan(makananId);

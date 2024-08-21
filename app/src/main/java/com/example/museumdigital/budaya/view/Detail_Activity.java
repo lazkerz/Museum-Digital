@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.museumdigital.R;
+import com.example.museumdigital.admin.budaya.view.TambahBudayaActivity;
 import com.example.museumdigital.budaya.model.DetailBudayaResponse;
 import com.example.museumdigital.core.remote.ApiClient.ApiClient;
 import com.example.museumdigital.budaya.model.Data;
+import com.example.museumdigital.resep.view.Detail_Resep_Activity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +24,7 @@ import retrofit2.Response;
 
 public class Detail_Activity extends AppCompatActivity {
 
-    public ImageView imageBudaya, back;
+    public ImageView imageBudaya, back, edit, delete;
 
     public TextView judul, kategori, deskripsi, link;
 
@@ -38,6 +40,8 @@ public class Detail_Activity extends AppCompatActivity {
         kategori = findViewById(R.id.tv_category);
         deskripsi = findViewById(R.id.tv_desc);
         link = findViewById(R.id.tv_link_maps);
+        edit = findViewById(R.id.ic_edit);
+        delete = findViewById(R.id.ic_delete);
 
         int budayaId = getIntent().getIntExtra("BUDAYA_ID", 1);
 
@@ -46,6 +50,16 @@ public class Detail_Activity extends AppCompatActivity {
 
         back.setOnClickListener(v -> onBackPressed());
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Detail_Activity.this, TambahBudayaActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        delete.setOnClickListener(v -> onDestroy());
         // Fetch the detail data
         fetchDetailBudaya(budayaId);
     }

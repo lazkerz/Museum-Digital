@@ -62,7 +62,6 @@ public class UserPresenter {
             }
         });
     }
-
     public void signOut() {
         String token = userDataStoreImpl.getToken();
 

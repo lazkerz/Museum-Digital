@@ -29,7 +29,8 @@ import java.io.File;
 
 public class TambahResepActivity extends AppCompatActivity implements AddMakananView {
 
-    private static final int REQUEST_CODE_GALLERY = 1;
+    private static final int REQUEST_CODE_READ_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_CODE_GALLERY = 3;
     private static final int REQUEST_PERMISSION = 100;
 
     private EditText etName, etDescription, etKeunikan, etBahan, etLangkah, etPenyajian, etMaps;
@@ -43,6 +44,10 @@ public class TambahResepActivity extends AppCompatActivity implements AddMakanan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_resep);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
+        }
 
         etName = findViewById(R.id.etNama);
         etDescription = findViewById(R.id.etDeskripsi);
@@ -88,17 +93,20 @@ public class TambahResepActivity extends AppCompatActivity implements AddMakanan
         startActivityForResult(intent, REQUEST_CODE_GALLERY);
     }
 
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION) {
+        if (requestCode == REQUEST_PERMISSION) { // Pastikan ini sesuai
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openGallery();
+                openGallery(); // Jika izin diberikan, buka galeri
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show(); // Tampilkan pesan jika izin ditolak
             }
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

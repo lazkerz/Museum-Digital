@@ -24,10 +24,10 @@
 
             <ImageView
                 android:id="@+id/ic_back"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginTop="6dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +44,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/ic_edit"-->
+<!--                android:layout_width="14dp"-->
+<!--                android:layout_height="14dp"-->
+<!--                android:layout_marginTop="6dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:src="@drawable/pencil_02"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/ic_delete"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/ic_delete"-->
+<!--                android:layout_width="14dp"-->
+<!--                android:layout_height="14dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginTop="6dp"-->
+<!--                android:src="@drawable/trash_01"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
